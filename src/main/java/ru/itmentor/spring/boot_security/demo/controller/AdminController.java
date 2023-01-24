@@ -25,6 +25,11 @@ public class AdminController {
         this.service = service;
     }
 
+    @RequestMapping("/")
+    public String formroot() {
+        return ("/login");
+    }
+
     @RequestMapping("/login")
     public String formlogin() {
         return ("/login");
@@ -33,8 +38,8 @@ public class AdminController {
     @RequestMapping("/admin")
     public String index(Model model) {
         model.addAttribute("list", service.getUsers());
-        List<Role> roles = service.getRoles();
-        model.addAttribute("allRoles", roles);
+        List<Role> roleList = service.getRoles();
+        model.addAttribute("allRoles", roleList);
 
         if (model.containsAttribute("user") && ((User) model.getAttribute("user")).getId() == 0) showedit = false;
         if (model.containsAttribute("user") && ((User) model.getAttribute("user")).getId() != 0) showtable = true;
@@ -47,14 +52,6 @@ public class AdminController {
         model.addAttribute("Showtable", showtable);
         model.addAttribute("Showedit", showedit);
         return "admin";
-    }
-
-    @RequestMapping("/admin/delete")
-    public String delete(@ModelAttribute("user") User user, Model model) {
-        service.deleteUser(user.getId());
-        showtable = true;
-        showedit = false;
-        return "redirect:/admin";
     }
 
     @RequestMapping("/admin/new")
@@ -107,4 +104,12 @@ public class AdminController {
         model.addAttribute("user", service.getUserById(id));
         return "fragments/delete_form";
         }
+
+    @RequestMapping("/admin/delete")
+    public String delete(@ModelAttribute("user") User user, Model model) {
+        service.deleteUser(user.getId());
+        showtable = true;
+        showedit = false;
+        return "redirect:/admin";
+    }
 }

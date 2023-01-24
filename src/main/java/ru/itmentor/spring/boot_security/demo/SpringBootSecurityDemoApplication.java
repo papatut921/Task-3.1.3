@@ -39,13 +39,13 @@ public class SpringBootSecurityDemoApplication implements CommandLineRunner {
 		admin_roles.add(adminrole);
 		admin_roles.add(userrole);
 
-		User admin = new User(1, "admin", "admin", "admin@gmail.com", 48, admin_roles);
+		User admin = new User(1, "admin", "admin", "admin@mail.ru", 48, admin_roles);
 		userDao.save(admin);
 
 		List<Role> user_roles = new ArrayList<>();
 		user_roles.add(userrole);
 
-		User user = new User(2, "user", "user", "user@gmail.com", 22, user_roles);
+		User user = new User(2, "user", "user", "user@mail.ru", 22, user_roles);
 		userDao.save(user);
 
 	}
