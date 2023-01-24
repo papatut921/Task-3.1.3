@@ -1,0 +1,59 @@
+<div class="container form-group text-center bg-white p-0">
+    <div class="bg-light pb-2">
+        <h5 class="text-center mt-2">Add new user</h5>
+    </div>
+    <div class="col-6 m-auto">
+    <form class="form-control" action="#" th:action="@{/admin/savenew}" th:object="${user}"
+          method="post">
+        <div class="mb-3">
+            <label for="firstname" class="form-label"><strong>First name</strong></label>
+            <br>
+            <input type="text" class="form-control field_yellow" required id="firstname" placeholder="Enter first name"
+                   th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('name')} ? 'is-invalid'" th:field="*{name}"/>
+            <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('name')}">
+                <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('name')}" th:text="${error.getDefaultMessage()}"/>
+            </th:block>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label"><strong>Age</strong></label>
+            <br>
+            <input type="number" class="form-control field_yellow" required id="age" placeholder="Enter your age"
+                   th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('age')} ? 'is-invalid'" th:field="*{age}"/>
+            <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('age')}">
+                <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('age')}" th:text="${error.getDefaultMessage()}"/>
+            </th:block>
+        </div>
+        <div class="mb-3">
+            <label for="emailuser" class="form-label"><strong>Email</strong></label>
+            <br>
+            <input type="email" class="form-control field_yellow" required id="emailuser" placeholder="Enter your email"
+                   th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('email')}  ? 'is-invalid'" th:field="*{email}"/>
+            <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('userMail')}">
+                <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('email')}" th:text="${error.getDefaultMessage()}"/>
+            </th:block>
+        </div>
+        <div class="mb-3">
+            <label for="passworduser" class="form-label"><strong>Password</strong></label>
+            <br>
+            <input type="text" class="form-control field_yellow" required id="passworduser" placeholder="Enter your password"
+                   th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('password')}  ? 'is-invalid'" th:field="*{password}"/>
+            <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('password')}">
+                <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('password')}" th:text="${error.getDefaultMessage()}"/>
+            </th:block>
+        </div>
+        <div  class="pb-3">
+            <label for="userroles"><strong>Role</strong></label>
+            <select multiple class="form-control text-center" id="userroles" size="2" th:field="*{roleList}" >
+                <option
+                        th:each="role : ${allRoles}"
+                        th:text="${role.toString()}"
+                        th:value="${role.id}"
+                ></option>
+            </select>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Add new user</button>
+        </div>
+        </form>
+    </div>
+</div>

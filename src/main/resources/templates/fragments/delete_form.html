@@ -1,0 +1,43 @@
+<div th:fragment="delete_form" class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Delete user</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+    </div>
+    <form class="form-control" action="admin/delete" th:object="${user}"  >
+        <div class="modal-body">
+            <div class="container col-6 text-center">
+                <div class="form-group text-center">
+                    <div>
+                        <label for="id"><strong>ID</strong></label>
+                        <input class="form-control"  type="text" th:field="*{id}"  hidden/>
+                        <input class="form-control"  id="id" type="text" th:field="*{id}"  disabled/>
+                    </div>
+                    <div>
+                        <label for="firstName" class="form-label"><strong>First name</strong></label>
+                        <input  class="form-control" id="firstName" type="text" th:field="*{name}" disabled/>
+                    </div>
+                    <div>
+                        <label for="age" class="form-label"><strong>Age</strong></label>
+                        <input class="form-control" id="age" type="number"  th:field="*{age}" disabled/>
+                    </div>
+                    <div>
+                        <label for="email" class="form-label"><strong>Email</strong></label>
+                        <input class="form-control" id="email" type="email"  th:field="*{email}" disabled/>
+                    </div>
+                    <div>
+                        <label for="password" class="form-label"><strong>Password</strong></label>
+                        <input class="form-control" id="password" type="text" required th:field="*{password}" disabled/>
+                    </div>
+                    <div>
+                        <label><strong>Role</strong></label>
+                    </div>
+                        <div th:utext="${user.getShotRoles()}">Role</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger submit">Delete</button>
+        </div>
+    </form>
+</div>

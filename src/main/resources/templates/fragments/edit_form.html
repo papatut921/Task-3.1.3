@@ -1,0 +1,71 @@
+<div th:fragment="edit_form" class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Edit user</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+    </div>
+    <form class="form-control" action="#" th:action="@{/admin/save}" th:object="${user}" method="post">
+        <div class="modal-body">
+            <div class="container col-6 text-center">
+                <div class="form-group text-center">
+                    <div>
+                        <label for="id"><strong>ID</strong></label>
+                        <input class="form-control" id="id" type="text" th:field="*{id}" readonly="readonly"/>
+                    </div>
+                    <div>
+                        <label for="firstName" class="form-label"><strong>First name</strong></label>
+                        <input class="form-control" th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('userName')}  ? 'is-invalid'"
+                               id="firstName" type="text" placeholder="Enter first name" required th:field="*{name}"/>
+
+                        <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('name')}">
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('name')}" th:text="${error.getDefaultMessage()}"/>
+                        </th:block>
+                    </div>
+                    <div>
+                        <label for="age" class="form-label"><strong>Age</strong></label>
+                        <input class="form-control" th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('age')}  ? 'is-invalid'"
+                               id="age" type="number" placeholder="Enter age" required  th:field="*{age}"/>
+
+                        <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('age')}">
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('age')}" th:text="${error.getDefaultMessage()}"/>
+                        </th:block>
+                    </div>
+                    <div>
+                        <label for="email" class="form-label"><strong>Email</strong></label>
+                        <input class="form-control" id="email" th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('Email')}  ? 'is-invalid'"
+                               type="email" placeholder="Enter email" required th:field="*{email}"/>
+
+                        <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('email')}">
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('email')}" th:text="${error.getDefaultMessage()}"/>
+                        </th:block>
+                    </div>
+                    <div>
+                        <label for="password" class="form-label"><strong>Password</strong></label>
+                        <input class="form-control" th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('password')}  ? 'is-invalid'"
+                               id="password" type="text" placeholder="Enter password" required th:field="*{password}"/>
+
+                        <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('password')}">
+                            <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('password')}" th:text="${error.getDefaultMessage()}"/>
+                        </th:block>
+                    </div>
+                    <div>
+                        <label for="roles"><strong>Role</strong></label>
+                    </div>
+                        <div>
+                        <select multiple id="roles"  th:field="*{roleList}" size="2">
+                            <option
+                                    th:each="role : ${allRoles}"
+                                    th:text="${role.name}"
+                                    th:value="${role.id}"
+                            >
+                            </option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary submit">Save</button>
+        </div>
+    </form>
+</div>
