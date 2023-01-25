@@ -35,7 +35,7 @@
         <div class="mb-3">
             <label for="passworduser" class="form-label"><strong>Password</strong></label>
             <br>
-            <input type="text" class="form-control field_yellow" required id="passworduser" placeholder="Enter your password"
+            <input type="password" class="form-control field_yellow" required id="passworduser" placeholder="Enter your password"
                    th:classappend="${bindingResult} and ${bindingResult.hasFieldErrors('password')}  ? 'is-invalid'" th:field="*{password}"/>
             <th:block th:if="${bindingResult} and ${bindingResult.hasFieldErrors('password')}">
                 <div class="invalid-feedback" th:each="error : ${bindingResult.getFieldErrors('password')}" th:text="${error.getDefaultMessage()}"/>
